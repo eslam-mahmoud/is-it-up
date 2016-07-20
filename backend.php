@@ -16,5 +16,5 @@ $headers = get_headers($url, 1);
 if ($headers === false) {
 	echo json_encode(array('result'=>false,'message'=>$url.' is down <img src="./img/sad-face.png">'));
 } else {
-	echo json_encode(array('result'=>true,'message'=>$url.' is up <img src="./img/smiling-face.png">'));
+	echo json_encode(array('result'=>true,'message'=>'<a href="'.$url.'">'.$url.'</a> is up <img src="./img/smiling-face.png">'));
 }
