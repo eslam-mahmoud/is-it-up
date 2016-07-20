@@ -8,6 +8,9 @@ if (strlen($url)<3) {
 	echo json_encode(array('result'=>false,'message'=>'The URL is too short!'));
 	die();
 }
+if (strpos($url, 'http') !== 0) {
+	$url = 'http://'.$url;
+}
 
 //get only headers not the full page and formate the result as array
 $headers = get_headers($url, 1);
