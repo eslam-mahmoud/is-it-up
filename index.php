@@ -49,7 +49,6 @@
                     //send ajax request to get if site is up
                     $.post( "backend.php", {url: $('#url').val()}, function(data) {
                         //on success
-                        console.log(data);
                         //parse returned data to see the status of the url
                         var result_json = JSON.parse(data);
                         if (result_json.result) {
