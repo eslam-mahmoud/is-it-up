@@ -51,6 +51,7 @@
                         //on success
                         //parse returned data to see the status of the url
                         var result_json = JSON.parse(data);
+                        //display result message
                         if (result_json.result) {
                             $('.alert-success').html(result_json.message);
                             $('.alert-success').show();
@@ -78,7 +79,7 @@
                     <form id="form" action="./" method="post" class="form-inline">
                         <div class="form-group">
                             <h2>Check if website is up or down?</h2>
-                            <input placeholder="http://example.com" class="form-control" type="text" name="url" id="url">
+                            <input placeholder="http://example.com" class="form-control" type="url" name="url" id="url">
                             <button type="submit" class="btn btn-default">Is it up?</button>
                         </div>
                     </form>
