@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <h2>Check if website is up or down?</h2>
                             <input ng-model="urlForm.url" placeholder="http://example.com" class="form-control" type="text" name="url" id="url">
-                            <button type="submit" class="btn btn-default">Is it up?</button>
+                            <button ng-disabled="urlForm.checkingURL" type="submit" class="btn btn-default">Is it up?</button>
                         </div>
                     </form>
                     <hr>
