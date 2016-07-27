@@ -1,5 +1,4 @@
 <?php
-
 //tring the posted URL
 $url = trim($_POST['url']);
 

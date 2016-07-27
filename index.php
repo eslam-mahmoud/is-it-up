@@ -36,9 +36,6 @@
         .alert {
             font-size: x-large;
         }
-        .alert-danger, .alert-success {
-            display: none;
-        }
         </style>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -92,9 +89,9 @@
                         </div>
                     </form>
                     <hr>
-                    <div role="alert" class="alert alert-success">
+                    <div role="alert" ng-show="urlForm.checkingURLSuccess" class="alert alert-success">
                     </div>
-                    <div role="alert" class="alert alert-danger">
+                    <div role="alert" ng-show="urlForm.checkingURLFail" class="alert alert-danger">
                     </div>
                     <div role="alert" ng-show="urlForm.checkingURL" class="alert alert-info">
                         Checking {{urlForm.url}} ...
