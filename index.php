@@ -9,12 +9,6 @@
         <meta name="author" content="Eslam Mahmoud">
 
         <title>Is It Up ?</title>
-        
-        <!-- jQuery Version 1.11.1 -->
-        <script src="js/jquery.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +18,9 @@
 
         <!-- Angular from CDN -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-        
+        <!-- Angular sanitize from CDN. needed to display html -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+
         <!-- Custom angular controller for this app -->
         <script src="js/isitup.js"></script>
 
@@ -44,36 +40,6 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <script type="text/javascript">
-            // $( document ).ready(function() {
-            //     $('#form').submit(function(e){
-            //         e.preventDefault();
-            //         //hide if message visible from last time
-            //         $('.alert').hide();
-
-            //         //send ajax request to get if site is up
-            //         $.post( "backend.php", {url: $('#url').val()}, function(data) {
-            //             //on success
-            //             //parse returned data to see the status of the url
-            //             var result_json = JSON.parse(data);
-            //             //display result message
-            //             if (result_json.result) {
-            //                 $('.alert-success').html(result_json.message);
-            //                 $('.alert-success').show();
-            //             } else {
-            //                 $('.alert-danger').html(result_json.message);
-            //                 $('.alert-danger').show();
-            //             }
-            //         })
-            //         //on fail
-            //         .fail(function(data) {
-            //             //alert error message
-            //             alert("We have prolem now can you try again");
-            //         });
-            //         return false;
-            //     });
-            // });
-        </script>
     </head>
 
     <body>
@@ -89,9 +55,9 @@
                         </div>
                     </form>
                     <hr>
-                    <div role="alert" ng-show="urlForm.checkingURLSuccess" class="alert alert-success">
+                    <div role="alert" ng-bind-html="urlForm.successMessage" ng-show="urlForm.checkingURLSuccess" class="alert alert-success">
                     </div>
-                    <div role="alert" ng-show="urlForm.checkingURLFail" class="alert alert-danger">
+                    <div role="alert" ng-bind-html="urlForm.failMessage" ng-show="urlForm.checkingURLFail" class="alert alert-danger">
                     </div>
                     <div role="alert" ng-show="urlForm.checkingURL" class="alert alert-info">
                         Checking {{urlForm.url}} ...

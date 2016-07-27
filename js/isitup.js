@@ -1,5 +1,5 @@
-angular.module('isitupApp', [])
-	.controller('UrlFormController', ['$http', function($http) {
+angular.module('isitupApp', ['ngSanitize'])
+	.controller('UrlFormController', ['$http', function($http, $sce) {
 		//map the name of the controller to internal name we can use inside this function
 		var urlForm = this;
 		//set default value
@@ -27,10 +27,10 @@ angular.module('isitupApp', [])
 				urlForm.checkingURL = false;
                 //display result message
                 if (response.data.result) {
-                    $('.alert-success').html(response.data.message);
+                    urlForm.successMessage = response.data.message;
                     urlForm.checkingURLSuccess = true;
                 } else {
-                    $('.alert-danger').html(response.data.message);
+                    urlForm.failMessage = response.data.message;
                     urlForm.checkingURLFail = true;
                 }
 			}, function errorCallback(response) {
