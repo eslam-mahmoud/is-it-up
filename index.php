@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="isitupApp">
     <head>
 
         <meta charset="utf-8">
@@ -22,14 +22,22 @@
         <!-- Custom styles for this template -->
         <link href="css/sticky-footer.css" rel="stylesheet">
 
+        <!-- Angular from CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        
+        <!-- Custom angular controller for this app -->
+        <script src="js/isitup.js"></script>
+
         <!-- Custom CSS -->
         <style>
         body {
             padding-top: 70px;
         }
         .alert {
-            display: none;
             font-size: x-large;
+        }
+        .alert-danger, .alert-success {
+            display: none;
         }
         </style>
 
@@ -40,34 +48,34 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <script type="text/javascript">
-            $( document ).ready(function() {
-                $('#form').submit(function(e){
-                    e.preventDefault();
-                    //hide if message visible from last time
-                    $('.alert').hide();
+            // $( document ).ready(function() {
+            //     $('#form').submit(function(e){
+            //         e.preventDefault();
+            //         //hide if message visible from last time
+            //         $('.alert').hide();
 
-                    //send ajax request to get if site is up
-                    $.post( "backend.php", {url: $('#url').val()}, function(data) {
-                        //on success
-                        //parse returned data to see the status of the url
-                        var result_json = JSON.parse(data);
-                        //display result message
-                        if (result_json.result) {
-                            $('.alert-success').html(result_json.message);
-                            $('.alert-success').show();
-                        } else {
-                            $('.alert-danger').html(result_json.message);
-                            $('.alert-danger').show();
-                        }
-                    })
-                    //on fail
-                    .fail(function(data) {
-                        //alert error message
-                        alert("We have prolem now can you try again");
-                    });
-                    return false;
-                });
-            });
+            //         //send ajax request to get if site is up
+            //         $.post( "backend.php", {url: $('#url').val()}, function(data) {
+            //             //on success
+            //             //parse returned data to see the status of the url
+            //             var result_json = JSON.parse(data);
+            //             //display result message
+            //             if (result_json.result) {
+            //                 $('.alert-success').html(result_json.message);
+            //                 $('.alert-success').show();
+            //             } else {
+            //                 $('.alert-danger').html(result_json.message);
+            //                 $('.alert-danger').show();
+            //             }
+            //         })
+            //         //on fail
+            //         .fail(function(data) {
+            //             //alert error message
+            //             alert("We have prolem now can you try again");
+            //         });
+            //         return false;
+            //     });
+            // });
         </script>
     </head>
 
@@ -75,11 +83,11 @@
         <!-- Page Content -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <form id="form" action="./" method="post" class="form-inline">
+                <div class="col-lg-12 text-center" ng-controller="UrlFormController as urlForm">
+                    <form class="form-inline" ng-submit="urlForm.checkURL()">
                         <div class="form-group">
                             <h2>Check if website is up or down?</h2>
-                            <input placeholder="http://example.com" class="form-control" type="text" name="url" id="url">
+                            <input ng-model="urlForm.url" placeholder="http://example.com" class="form-control" type="text" name="url" id="url">
                             <button type="submit" class="btn btn-default">Is it up?</button>
                         </div>
                     </form>
@@ -87,6 +95,9 @@
                     <div role="alert" class="alert alert-success">
                     </div>
                     <div role="alert" class="alert alert-danger">
+                    </div>
+                    <div role="alert" ng-show="urlForm.checkingURL" class="alert alert-info">
+                        Checking {{urlForm.url}} ...
                     </div>
                 </div>
             </div>
