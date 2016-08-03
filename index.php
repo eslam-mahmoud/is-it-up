@@ -25,14 +25,7 @@
         <script src="js/isitup.js"></script>
 
         <!-- Custom CSS -->
-        <style>
-        body {
-            padding-top: 70px;
-        }
-        .alert {
-            font-size: x-large;
-        }
-        </style>
+        <link href="css/custom.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
