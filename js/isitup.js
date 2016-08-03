@@ -12,11 +12,17 @@ angular.module('isitupApp', ['ngSanitize'])
             //show loading message
             urlForm.checkingURL = true;
 
+            //avoid empty submission
+            var url = '';
+            if (urlForm.url !== undefined) {
+                url = urlForm.url;
+            }
+
             // Post request to get url status:
             $http({
                 url: 'backend.php',
                 method: 'POST',
-                data: "url=" + urlForm.url, //if used data: {url: urlForm.url} will get empty $_POST in PHP !!
+                data: "url=" + url, //if used data: {url: urlForm.url} will get empty $_POST in PHP !!
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },

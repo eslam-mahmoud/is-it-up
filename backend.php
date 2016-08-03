@@ -1,4 +1,5 @@
 <?php
+
 class isitup {
 	private $url = null;
 	private $result = array('status', 'message');
@@ -22,7 +23,7 @@ class isitup {
 	//see is it up or not
 	public function check() {
 		//if short string that can not be URL return error message
-		if (strlen($this->url)<3) {
+		if (!$this->url OR strlen($this->url)<3) {
 			$this->result['status'] = false;
 			$this->result['message'] = 'The URL is too short!';
 		} else {
@@ -41,7 +42,7 @@ class isitup {
 		return json_encode($this->result);
 	}
 }
-
-$isitup = new isitup($_POST['url']);
+$url = isset($_POST['url'])?$_POST['url']:null;
+$isitup = new isitup($url);
 $result = $isitup->check();
 echo $result;
