@@ -9,7 +9,7 @@ try {
 	$mongoClient = new MongoDB\Client(MONGODB_URL);
 	//select the DB and collection that we will work on
 	$historyCollection = $mongoClient->{MONGODB_NAME}->{MONGODB_COLLECTION};
-	//find last 100 documents inserted
+	//find last X documents inserted
 	$cursor = $historyCollection->find([],
 	    [
 	        'limit' => 25,
