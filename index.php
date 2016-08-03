@@ -38,8 +38,8 @@
     <body>
         <!-- Page Content -->
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center" ng-controller="UrlFormController as urlForm">
+            <div class="row" ng-controller="UrlFormController as urlForm">
+                <div class="col-lg-12 text-center">
                     <form class="form-inline" ng-submit="urlForm.checkURL()">
                         <div class="form-group">
                             <h2>Check if website is up or down?</h2>
@@ -54,6 +54,20 @@
                     </div>
                     <div role="alert" ng-show="urlForm.checkingURL" class="alert alert-info">
                         Checking {{urlForm.url}} ...
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-controller="HistoryController as history">
+                <div class="col-lg-12" ng-show="history.items">
+                    <h3>Last 25 websites users checked</h3>
+                </div>
+                <div ng-repeat="item in history.items">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-2">
+                        <img ng-hide="item.status" src="./img/sad-face.png">
+                        <img ng-show="item.status" src="./img/smiling-face.png">
+                        <a href="{{item.url}}">{{item.url}}</a> was <span ng-show="item.status">Up</span><span ng-hide="item.status">down</span> @ {{item.time*1000 | date:'MMM dd, yyyy h:mma Z'}}
                     </div>
                 </div>
             </div>

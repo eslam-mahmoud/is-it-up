@@ -54,5 +54,25 @@ angular.module('isitupApp', ['ngSanitize'])
             urlForm.checkingURLSuccess = false;
             urlForm.checkingURLFail = false;
         }
-    }]
-);
+    }])
+    .controller('HistoryController', ['$http', function($http, $sce) {
+        //map the name of the controller to internal name we can use inside this function
+        var history = this;
+        //set default value
+        history.items = false;
+        
+        history.getHistory = function () {
+            // Post request to get url status:
+            $http({
+                url: 'history.php',
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+            }).then(function successCallback(response) {
+                history.items = response.data;
+            }, function errorCallback(response) {
+            });
+        };
+        history.getHistory();
+    }]);
