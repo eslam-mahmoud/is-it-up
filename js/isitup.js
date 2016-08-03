@@ -55,7 +55,7 @@ angular.module('isitupApp', ['ngSanitize'])
             urlForm.checkingURLFail = false;
         }
     }])
-    .controller('HistoryController', ['$http', function($http, $sce) {
+    .controller('HistoryController', ['$http', function($http) {
         //map the name of the controller to internal name we can use inside this function
         var history = this;
         //set default value
