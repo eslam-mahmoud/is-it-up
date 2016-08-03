@@ -26,7 +26,7 @@ angular.module('isitupApp', ['ngSanitize'])
                 //parse returned data to see the status of the url
                 urlForm.checkingURL = false;
                 //display result message
-                if (response.data.result) {
+                if (response.data.status) {
                     urlForm.successMessage = response.data.message;
                     urlForm.checkingURLSuccess = true;
                 } else {
