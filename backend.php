@@ -3,16 +3,23 @@ require 'config.php';
 require 'vendor/autoload.php'; // include Composer goodies
 require 'classes/isitup.php';
 
-
-//do the work
+//Get the url from POST request
 $url = isset($_POST['url'])?$_POST['url']:null;
+//create new object from is it up class
 $isitup = new isitup($url);
-$result = $isitup->check();
-echo json_encode($result);
+//check on the status of the url
+$isitupResult = $isitup->check();
 
-//connect to mongo DB
-$mongoClient = new MongoDB\Client(MONGODB_URL);
-//select the DB and collection that we will work on
-$historyCollection = $mongoClient->{MONGODB_NAME}->{MONGODB_COLLECTION};
-//Insert new document in the collection with the result of the check
-$result = $historyCollection->insertOne( [ 'url' => $result['url'], 'status' => $result['status'], 'time' => time() ] );
+try {	
+	//connect to mongo DB
+	$mongoClient = new MongoDB\Client(MONGODB_URL);
+	//select the DB and collection that we will work on
+	$historyCollection = $mongoClient->{MONGODB_NAME}->{MONGODB_COLLECTION};
+	//Insert new document in the collection with the result of the check
+	$result = $historyCollection->insertOne( [ 'url' => $isitupResult['url'], 'status' => $isitupResult['status'], 'time' => time() ] );
+} catch (Exception $e) {
+	//Do nothing :D
+}
+
+//display the result to the user
+echo json_encode($isitupResult);
