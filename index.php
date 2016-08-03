@@ -63,11 +63,9 @@
                 </div>
                 <div ng-repeat="item in history.items">
                     <div class="col-lg-2">
-                    </div>
-                    <div class="col-lg-2">
                         <img ng-hide="item.status" src="./img/sad-face.png">
                         <img ng-show="item.status" src="./img/smiling-face.png">
-                        <a href="{{item.url}}">{{item.url}}</a> was <span ng-show="item.status">Up</span><span ng-hide="item.status">down</span> @ {{item.time*1000 | date:'MMM dd, yyyy h:mma Z'}}
+                        <a target="_blank" href="{{item.url}}">{{item.url}}</a> was <span ng-show="item.status">Up</span><span ng-hide="item.status">down</span> @ {{item.time*1000 | date:'MMM dd, yyyy h:mma Z'}}
                     </div>
                 </div>
             </div>

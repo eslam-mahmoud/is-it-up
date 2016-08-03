@@ -23,7 +23,7 @@ class isitup {
 	public function check() {
 		//set the cleaned url in the result
 		$this->result['url'] = $this->url;
-		
+
 		//if short string that can not be URL return error message
 		if (!$this->url OR strlen($this->url)<3) {
 			$this->result['status'] = false;
@@ -38,7 +38,7 @@ class isitup {
 				$this->result['message'] = $this->url . ' is down <img src="./img/sad-face.png">';
 			} else {
 				$this->result['status'] = true;
-				$this->result['message'] = '<a href="'.$this->url.'">'.$this->url.'</a> is up <img src="./img/smiling-face.png">';
+				$this->result['message'] = '<a target="_blank" href="'.$this->url.'">'.$this->url.'</a> is up <img src="./img/smiling-face.png">';
 			}
 		}
 		return $this->result;
